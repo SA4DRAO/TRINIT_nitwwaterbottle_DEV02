@@ -1,0 +1,30 @@
+{% extends 'projects/base.html' %} {% block title %} Home {% endblock title %}
+{% block home %}
+<div class="container mt-3">
+  <h1 class="display-4 project-title">Projects</h1>
+  <table class="table mt-5">
+    <thead>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Organization/Company</th>
+      <th scope="col">Technology Used</th>
+      <th scope="col">Team Leader</th>
+    </thead>
+    <tbody>
+      {% for project in projects %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td><a href="">{{project.proj_name}}</a></td>
+        <td>{{project.org_name}}</td>
+        <td>{{project.domain}}</td>
+        <td>{{project.team_leader.username}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="flex-container">
+    <a href="{% url 'projects:addproject' %}">add project</a>
+  </div>
+</div>
+{% endblock home %}

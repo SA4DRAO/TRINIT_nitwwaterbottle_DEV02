@@ -1,0 +1,103 @@
+{% extends 'users/layout.html' %}
+{% load static %}
+
+
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid"  style="background-image: url(https://wallpapercave.com/wp/tmx6W6N.png); background-size: cover;">
+    <div class="container">
+      <h1 class='display-3'>Hello {{profile_details.user.username|title}}</h1>
+      <p style='font-size: larger;'>This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks.</p>
+    </div>
+</div>
+
+{% if message %}
+  <div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endif %}
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-lg-4'>
+      <div class="card my-3">
+        <div class='card-body'>
+          <h3 class='text-center pt-5 pb-3'>{{ profile_details.first_name }} {{ profile_details.last_name }}</h3>
+          <p class='text-center'>{{ profile_details.bio}}</p>
+          <p class='text-center py-3 text-muted'>Since: {{ profile_details.user.date_joined }}</p>
+          <div class='text-center mb-4'>
+            <button data-toggle="collapse" data-target="#profile_update_form" class= 'mt- btn btn-xl btn-primary'>Update Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-8'>
+      <div class="card my-3">
+        <div class="card-body">
+          <h3 class='text-center pb-3'>Profile Details</h3>
+          <div class="row pb-1">
+            <div class="col-md-6">
+                <label>Username</label>
+            </div>
+            <div class="col-md-6">
+                <p>{{ profile_details.user.username }}</p>
+            </div>
+        </div>
+        <div class="row pb-1">
+            <div class="col-md-6">
+                <label>First Name</label>
+            </div>
+            <div class="col-md-6">
+                <p>{{ profile_details.first_name }}</p>
+            </div>
+        </div>
+        <div class="row pb-1">
+            <div class="col-md-6">
+                <label>Last Name</label>
+            </div>
+            <div class="col-md-6">
+                <p>{{ profile_details.last_name }}</p>
+            </div>
+        </div>
+        <div class="row pb-1">
+          <div class="col-md-6">
+              <label>Gender</label>
+          </div>
+          <div class="col-md-6">
+              <p>{{ profile_details.gender }}</p>
+          </div>
+      </div>
+        <div class="row pb-1">
+            <div class="col-md-6">
+                <label>Email</label>
+            </div>
+            <div class="col-md-6">
+                <p>{{ profile_details.user.email }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Bio</label>
+            </div>
+            <div class="col-md-6">
+                <p>{{ profile_details.bio}}</p>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id = 'profile_update_form' class='row collapse'>
+    <div class='col-lg-10'>
+      <form method='POST'>
+        {% csrf_token %}
+        {{ u_form.as_p }}
+        {{ p_form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
